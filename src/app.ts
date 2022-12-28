@@ -1,20 +1,17 @@
 import express, {Request, Response} from "express";
+import cors from 'cors';
 
 const app = express();
-
 app.use(express.json())
+app.use(cors({ origin: true, credentials: true }));
 
 app.get("/",(req: Request, res: Response) => {
     return res.json({
-        hello: "world"
+        hello: "World !!"
     })
 })
 
 
-app.post("/post",(req: Request, res: Response) => {
-    console.log(req.body)
-    return res.sendStatus(200)
-})
 
 
 app.listen(4000)
