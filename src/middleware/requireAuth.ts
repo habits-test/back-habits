@@ -14,7 +14,6 @@ async function requireAuth(req: Request, res: Response, next: NextFunction) {
     if (!user) return res.sendStatus(401);
 
     req.user = user;
-    console.log("//////////////////////////////////: Middlware")
     next();
   } catch (err) {
     return res.sendStatus(401);
