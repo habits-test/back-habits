@@ -48,6 +48,7 @@ async function login(req: Request, res: Response) {
 
   function checkAuth(req: Request, res: Response) {
     try {
+      res.json({user: req.user})
       res.sendStatus(200);
     } catch (err) {
       console.log(err);
