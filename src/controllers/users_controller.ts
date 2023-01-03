@@ -3,13 +3,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 import User from "../models/user"
 
-
 async function signup(req: Request, res: Response) {
     try {
-      const { email, password } = req.body;
+      const { firstName, lastName, email, password } = req.body;
         const hashedPassword = bcrypt.hashSync(password, 8);
 
-        await User.create({ email, password: hashedPassword });
+        await User.create({ firstName, lastName, email, password: hashedPassword });
         res.sendStatus(200);
     } catch (err) {
         console.log(err);

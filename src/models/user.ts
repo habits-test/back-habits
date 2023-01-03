@@ -5,10 +5,20 @@ class User extends Model {
   declare id: number;
   declare email: string;
   declare password: string;
+  declare firstName: string;
+  declare lastName: string;
 }
 
 User.init(
   {
+    firstName: {
+      type: new DataTypes.STRING(128),
+      allowNull: false,
+    },
+    lastName: {
+      type: new DataTypes.STRING(128),
+      allowNull: false,
+    },
     email: {
       type: new DataTypes.STRING(128),
       allowNull: false,
