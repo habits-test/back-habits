@@ -1,6 +1,6 @@
-import {Request, Response, NextFunction} from "express";
+import { Request, Response, NextFunction } from "express";
 const jwt = require("jsonwebtoken");
-import User from "../models/user"
+import User from "../models/user";
 
 async function requireAuth(req: Request, res: Response, next: NextFunction) {
   try {
@@ -13,11 +13,12 @@ async function requireAuth(req: Request, res: Response, next: NextFunction) {
 
     if (!user) return res.sendStatus(401);
 
-    req.user = user;
+    req.body.user = user;
+
     next();
   } catch (err) {
     return res.sendStatus(401);
   }
 }
 
-export { requireAuth }
+export { requireAuth };

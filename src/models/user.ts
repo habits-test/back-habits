@@ -1,5 +1,6 @@
-import { Model, DataTypes } from 'sequelize'
-import {sequelize} from "./index"
+import { Model, DataTypes } from "sequelize";
+import { sequelize } from "./index";
+import Habit from "./habit";
 
 class User extends Model {
   declare id: number;
@@ -29,10 +30,12 @@ User.init(
     },
   },
   {
-    tableName: 'users',
+    tableName: "users",
     sequelize, // passing the `sequelize` instance is required
-  },
+  }
 );
 
+User.hasMany(Habit);
+Habit.belongsTo(User);
 
 export default User;
