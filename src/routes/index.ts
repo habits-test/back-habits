@@ -4,7 +4,7 @@ import {
   logout,
   checkAuth,
 } from "../controllers/users_controller";
-import { createHabit } from "../controllers/habits_controller";
+import { getHabits, createHabit } from "../controllers/habits_controller";
 import { requireAuth } from "../middleware/requireAuth";
 import { app } from "../app";
 
@@ -17,4 +17,5 @@ export const usersRoutes = (): void => {
 
 export const habitsRoutes = (): void => {
   app.post("/habits", requireAuth, createHabit);
+  app.get("/habits", requireAuth, getHabits);
 };
