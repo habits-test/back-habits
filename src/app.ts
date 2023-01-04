@@ -3,10 +3,12 @@ import cors from 'cors';
 const cookieParser = require("cookie-parser");
 import {connectToDB } from './models'
 import User from "./models/user";
-import { usersRoutes } from "./routes";
+import Habit from "./models/habit";
+import { usersRoutes, habitsRoutes } from "./routes";
 
 connectToDB()
 User.sync({alter: true})
+Habit.sync({alter: true})
 
 export const app = express();
 app.use(express.json())
@@ -21,7 +23,10 @@ app.get("/",(req: Request, res: Response) => {
     })
 })
 usersRoutes()
+habitsRoutes()
 
 
 
-app.listen(4000)
+app.listen(4000, () => {
+    console.log("Server running on port 4000")
+})
