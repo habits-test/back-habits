@@ -1,21 +1,14 @@
-import {
-  signup,
-  login,
-  logout,
-  checkAuth,
-} from "../controllers/users_controller";
-import { getHabits, createHabit } from "../controllers/habits_controller";
-import { requireAuth } from "../middleware/requireAuth";
-import { app } from "../app";
+import { Application, Request, Response } from "express";
+import { usersRoutes } from "./usersRoutes";
+import { habitsRoutes } from "./habitsRoutes";
 
-export const usersRoutes = (): void => {
-  app.post("/signup", signup);
-  app.post("/signin", login);
-  app.get("/logout", logout);
-  app.get("/check-auth", requireAuth, checkAuth);
-};
+export const routes = (app: Application) => {
+  app.get("/", (req: Request, res: Response) => {
+    return res.json({
+      hello: "Worldd !!",
+    });
+  });
 
-export const habitsRoutes = (): void => {
-  app.post("/habits", requireAuth, createHabit);
-  app.get("/habits", requireAuth, getHabits);
+  usersRoutes(app);
+  habitsRoutes(app);
 };

@@ -19,8 +19,8 @@ async function getHabits(req: Request, res: Response) {
 async function createHabit(req: Request, res: Response) {
   try {
     const { name, time, user } = req.body;
-    await Habit.create({ name, time, UserId: user.id });
-    res.sendStatus(200);
+    const habit = await Habit.create({ name, time, UserId: user.id });
+    res.json({ habit: habit });
   } catch (err) {
     console.log(err);
     res.sendStatus(400);
