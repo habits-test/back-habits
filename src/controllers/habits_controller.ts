@@ -27,4 +27,25 @@ async function createHabit(req: Request, res: Response) {
   }
 }
 
-export { createHabit, getHabits };
+async function updateHabitProgress(req: Request, res: Response) {
+  try {
+    const { progress } = req.body;
+
+    const { id } = req.params;
+    const habit = await Habit.findByPk(id);
+    if (habit) {
+      habit.set({
+        progress: progress,
+      });
+      await habit.save();
+      return res.sendStatus(200);
+    }
+
+    res.sendStatus(404);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+}
+
+export { createHabit, getHabits, updateHabitProgress };

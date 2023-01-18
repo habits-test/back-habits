@@ -15,6 +15,11 @@ Habit.init(
       type: new DataTypes.TIME(),
       allowNull: false,
     },
+    progress: {
+      type: new DataTypes.JSONB(),
+      defaultValue: {},
+      allowNull: false,
+    },
   },
   {
     tableName: "habits",
