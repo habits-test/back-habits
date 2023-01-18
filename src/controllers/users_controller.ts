@@ -35,8 +35,8 @@ async function login(req: Request, res: Response) {
     res.cookie("Authorization", token, {
       expires: new Date(exp),
       httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      sameSite: "none",
+      secure: true,
     });
     res.sendStatus(200);
   } catch (err) {
@@ -56,7 +56,11 @@ function checkAuth(req: Request, res: Response) {
 
 function logout(req: Request, res: Response) {
   try {
-    res.clearCookie("Authorization");
+    res.clearCookie("Authorization", {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
     res.sendStatus(200);
   } catch (err) {
     console.log(err);
